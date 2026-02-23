@@ -46,8 +46,8 @@ if [[ $(id -u) == "0" ]] ; then
 	exit 1
 fi
 
-if ! command -v wget &> /dev/null ; then
-	echo "wget executable not found. Is wget installed?"
+if ! command -v curl &> /dev/null ; then
+	echo "curl executable not found. Is curl installed?"
 	exit 1
 fi
 
@@ -322,8 +322,8 @@ if [[ $TIKA_ENABLED == "yes" ]] ; then
 	DOCKER_COMPOSE_VERSION="$DOCKER_COMPOSE_VERSION-tika"
 fi
 
-wget "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/docker-compose.$DOCKER_COMPOSE_VERSION.yml" -O docker-compose.yml
-wget "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/.env" -O .env
+curl "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/docker-compose.$DOCKER_COMPOSE_VERSION.yml" -o docker-compose.yml
+curl "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/.env" -o .env
 
 SECRET_KEY=$(LC_ALL=C tr -dc 'a-zA-Z0-9!#$%&()*+,-./:;<=>?@[\]^_`{|}~' < /dev/urandom | dd bs=1 count=64 2>/dev/null)
 
